@@ -18,6 +18,21 @@ Replace sample content with your own and [configure as necessary](https://mmista
 
 ---
 
+## Local Development
+
+Ensure you have the primary dependencies installed:
+* Ruby - https://www.ruby-lang.org/en/documentation/installation/
+* RubyGems - https://rubygems.org/pages/download
+* Bundler - https://bundler.io/guides/getting_started.html
+
+All that you need to do now is run the following from the repository root:
+
+```
+> bundle exec jekyll serve
+```
+
+The console output will indicate what URL to navigate to.
+
 ## Troubleshooting
 
 If you have a question about using Jekyll, start a discussion on the [Jekyll Forum](https://talk.jekyllrb.com/) or [StackOverflow](https://stackoverflow.com/questions/tagged/jekyll). Other resources:
