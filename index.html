@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The New AI — Paul Raff</title>
+  <meta name="description" content="Data is the New AI. Paul Raff helps companies big and small unlock the real value hidden in their data." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0a0a0a;
+      --surface:   #111111;
+      --border:    #1e1e1e;
+      --accent:    #e8ff47;
+      --accent2:   #47ffe8;
+      --text:      #f0f0f0;
+      --muted:     #6b6b6b;
+      --max-w:     1120px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 2rem;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--bg) !important;
+      background: var(--accent);
+      padding: 0.5rem 1.25rem;
+      border-radius: 4px;
+      transition: opacity 0.2s !important;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 2rem 4rem;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 600px;
+      margin-bottom: 3rem;
+      line-height: 1.7;
+    }
+
+    .hero-sub strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 0.875rem 2rem;
+      background: var(--accent);
+      color: var(--bg);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+
+    .btn-secondary {
+      display: inline-block;
+      padding: 0.875rem 2rem;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-weight: 500;
+      font-size: 0.9rem;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: border-color 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--muted); }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      padding: 1rem 0;
+      background: var(--surface);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 3rem;
+      animation: scroll 20s linear infinite;
+      white-space: nowrap;
+      width: max-content;
+    }
+
+    .marquee-track span {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .marquee-track .dot {
+      color: var(--accent);
+    }
+
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 6rem 2rem;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── THESIS ── */
+    #thesis {
+      border-top: 1px solid var(--border);
+    }
+
+    .thesis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .thesis-body {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .thesis-body p + p { margin-top: 1.25rem; }
+
+    .thesis-body strong { color: var(--text); font-weight: 600; }
+
+    .thesis-quote {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 700;
+      line-height: 1.3;
+      border-left: 3px solid var(--accent);
+      padding-left: 1.5rem;
+      color: var(--text);
+    }
+
+    /* ── SERVICES ── */
+    #services {
+      border-top: 1px solid var(--border);
+    }
+
+    .services-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .service-list {
+      display: grid;
+      gap: 0;
+    }
+
+    .service-item {
+      display: grid;
+      grid-template-columns: 3rem 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+
+    .service-item:first-child { border-top: 1px solid var(--border); }
+
+    .service-num {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+    }
+
+    .service-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .service-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+
+    .service-tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* ── WHY ── */
+    #why {
+      border-top: 1px solid var(--border);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 3rem;
+    }
+
+    .why-card {
+      background: var(--surface);
+      padding: 2.5rem 2rem;
+    }
+
+    .why-icon {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .why-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .why-card p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .contact-info p {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-top: 1.25rem;
+    }
+
+    .contact-links {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-link:hover { color: var(--text); }
+
+    .contact-link-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      width: 3.5rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.75rem 1rem;
+      font-family: inherit;
+      font-size: 0.9rem;
+      color: var(--text);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--accent);
+    }
+
+    textarea { resize: vertical; min-height: 120px; }
+
+    .form-submit {
+      margin-top: 0.5rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .thesis-grid,
+      .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .why-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .service-item { grid-template-columns: 2rem 1fr; }
+      .service-tag { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">THENEW.AI</a>
+    <ul class="nav-links">
+      <li><a href="#thesis">Thesis</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#why">Why Paul</a></li>
+      <li><a href="#contact" class="nav-cta">Work Together</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div id="hero">
+    <p class="hero-eyebrow">Paul Raff — Data &amp; AI Strategy</p>
+    <h1>Data is<br>the <em>New AI.</em></h1>
+    <p class="hero-sub">
+      Everyone is racing to adopt AI. The companies that will win
+      aren't the ones with the fanciest models —
+      they're the ones with <strong>better data, clearer strategy,
+      and the right partner.</strong>
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Let's Work Together</a>
+      <a href="#thesis" class="btn-secondary">Read the Thesis →</a>
+    </div>
+  </div>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Data Strategy</span><span class="dot">✦</span>
+      <span>AI Readiness</span><span class="dot">✦</span>
+      <span>ML Architecture</span><span class="dot">✦</span>
+      <span>Data Governance</span><span class="dot">✦</span>
+      <span>Product Analytics</span><span class="dot">✦</span>
+      <span>Executive Advisory</span><span class="dot">✦</span>
+      <span>Data Culture</span><span class="dot">✦</span>
+      <span>Pipeline Engineering</span><span class="dot">✦</span>
+      <!-- duplicate for seamless scroll -->
+      <span>Data Strategy</span><span class="dot">✦</span>
+      <span>AI Readiness</span><span class="dot">✦</span>
+      <span>ML Architecture</span><span class="dot">✦</span>
+      <span>Data Governance</span><span class="dot">✦</span>
+      <span>Product Analytics</span><span class="dot">✦</span>
+      <span>Executive Advisory</span><span class="dot">✦</span>
+      <span>Data Culture</span><span class="dot">✦</span>
+      <span>Pipeline Engineering</span><span class="dot">✦</span>
+    </div>
+  </div>
+
+  <!-- THESIS -->
+  <section id="thesis">
+    <p class="section-label">The Thesis</p>
+    <div class="thesis-grid">
+      <div>
+        <h2>AI won't save<br>bad data.</h2>
+        <div class="thesis-body">
+          <p>
+            Every company is talking about AI. But most are building on foundations
+            that will fail them — <strong>siloed data, undefined metrics, no data culture,
+            and no strategy</strong> for what AI is even supposed to do.
+          </p>
+          <p>
+            The AI winners of the next decade aren't going to be the companies
+            that deployed the most models. They'll be the ones who treated
+            <strong>data as a strategic asset first</strong>.
+          </p>
+          <p>
+            That's the shift I help companies make — from AI hype to
+            AI leverage.
+          </p>
+        </div>
+      </div>
+      <div>
+        <p class="thesis-quote">
+          "The best AI strategy is almost always a better data strategy in disguise."
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="services-header">
+      <div>
+        <p class="section-label">What I Do</p>
+        <h2>Services</h2>
+      </div>
+      <a href="#contact" class="btn-secondary">Discuss your project →</a>
+    </div>
+    <div class="service-list">
+      <div class="service-item">
+        <span class="service-num">01</span>
+        <div>
+          <div class="service-name">AI &amp; Data Strategy</div>
+          <div class="service-desc">Roadmaps that connect your data to real business outcomes — not just dashboards.</div>
+        </div>
+        <span class="service-tag">Advisory</span>
+      </div>
+      <div class="service-item">
+        <span class="service-num">02</span>
+        <div>
+          <div class="service-name">Data Architecture &amp; Engineering</div>
+          <div class="service-desc">Modern data stacks, pipeline design, and the infrastructure AI actually needs to work.</div>
+        </div>
+        <span class="service-tag">Engineering</span>
+      </div>
+      <div class="service-item">
+        <span class="service-num">03</span>
+        <div>
+          <div class="service-name">ML &amp; AI Product Development</div>
+          <div class="service-desc">From prototype to production — building ML systems that integrate with your business.</div>
+        </div>
+        <span class="service-tag">Engineering</span>
+      </div>
+      <div class="service-item">
+        <span class="service-num">04</span>
+        <div>
+          <div class="service-name">Data Governance &amp; Quality</div>
+          <div class="service-desc">Frameworks for trustworthy data — because models are only as good as what feeds them.</div>
+        </div>
+        <span class="service-tag">Advisory</span>
+      </div>
+      <div class="service-item">
+        <span class="service-num">05</span>
+        <div>
+          <div class="service-name">Executive &amp; Team Advisory</div>
+          <div class="service-desc">Helping leadership teams build data-first cultures and make smarter technology bets.</div>
+        </div>
+        <span class="service-tag">Advisory</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section id="why">
+    <p class="section-label">Why Paul</p>
+    <h2>Forward thinking,<br>practical results.</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">⚡</div>
+        <h3>Both sides of the table</h3>
+        <p>Experience at large enterprises and fast-moving startups. I know the constraints of each — and what actually moves the needle.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🎯</div>
+        <h3>Strategy meets engineering</h3>
+        <p>I don't just advise — I build. That means my recommendations are grounded in what's technically feasible, not just theoretically ideal.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🔭</div>
+        <h3>Ahead of the curve</h3>
+        <p>I've been thinking about data-centric AI before it was the consensus view. You get a perspective that sees where things are going, not just where they are.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <div class="contact-info">
+        <p class="section-label">Get In Touch</p>
+        <h2>Let's work<br>together.</h2>
+        <p>
+          Whether you're a startup trying to build a data foundation,
+          or an enterprise navigating an AI transformation —
+          I'd love to hear what you're working on.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:paul@thenew.ai" class="contact-link">
+            <span class="contact-link-label">Email</span>
+            paul@thenew.ai
+          </a>
+          <a href="https://linkedin.com/in/paulraff" class="contact-link" target="_blank" rel="noopener">
+            <span class="contact-link-label">LinkedIn</span>
+            linkedin.com/in/paulraff
+          </a>
+        </div>
+      </div>
+      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="form-row">
+          <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required placeholder="Jane Smith" />
+          </div>
+          <div>
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" placeholder="Acme Corp" />
+          </div>
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="jane@acmecorp.com" />
+        </div>
+        <div>
+          <label for="interest">I'm interested in</label>
+          <select id="interest" name="interest">
+            <option value="">Select a service...</option>
+            <option>AI &amp; Data Strategy</option>
+            <option>Data Architecture &amp; Engineering</option>
+            <option>ML &amp; AI Product Development</option>
+            <option>Data Governance &amp; Quality</option>
+            <option>Executive Advisory</option>
+            <option>Something else</option>
+          </select>
+        </div>
+        <div>
+          <label for="message">Tell me about your project</label>
+          <textarea id="message" name="message" required placeholder="What are you working on? What's the challenge?"></textarea>
+        </div>
+        <div class="form-submit">
+          <button type="submit" class="btn-primary" style="border:none;cursor:pointer;width:100%;">Send Message →</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">THENEW.AI</span>
+    <span class="footer-copy">© 2026 Paul Raff. All rights reserved.</span>
+  </footer>
+
+</body>
+</html>
