@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background -->
+  <rect width="100" height="100" fill="#0a0a0a" rx="12"/>
+
+  <!--
+    Fano plane — equilateral triangle, circumradius 42, centered at (50,52)
+    A = (50, 10)  top vertex
+    B = (13.6, 73) bottom-left vertex
+    C = (86.4, 73) bottom-right vertex
+    D = (50, 73)   mid bottom edge
+    E = (68.2,41.5) mid right edge
+    F = (31.8,41.5) mid left edge
+    G = (50, 52)   centroid / center
+    Circle through D,E,F: cx=50 cy=52 r=21
+  -->
+
+  <!-- Triangle sides -->
+  <line x1="50"   y1="10"   x2="13.6" y2="73"   stroke="#e8ff47" stroke-width="2.8" stroke-linecap="round"/>
+  <line x1="50"   y1="10"   x2="86.4" y2="73"   stroke="#e8ff47" stroke-width="2.8" stroke-linecap="round"/>
+  <line x1="13.6" y1="73"   x2="86.4" y2="73"   stroke="#e8ff47" stroke-width="2.8" stroke-linecap="round"/>
+
+  <!-- Medians -->
+  <line x1="50"   y1="10"   x2="50"   y2="73"   stroke="#e8ff47" stroke-width="2.8" stroke-linecap="round"/>
+  <line x1="13.6" y1="73"   x2="68.2" y2="41.5" stroke="#e8ff47" stroke-width="2.8" stroke-linecap="round"/>
+  <line x1="86.4" y1="73"   x2="31.8" y2="41.5" stroke="#e8ff47" stroke-width="2.8" stroke-linecap="round"/>
+
+  <!-- Inscribed circle through midpoints D, E, F -->
+  <circle cx="50" cy="52" r="21" fill="none" stroke="#e8ff47" stroke-width="2.8"/>
+
+  <!-- 7 Points -->
+  <circle cx="50"   cy="10"   r="4.5" fill="#e8ff47"/>
+  <circle cx="13.6" cy="73"   r="4.5" fill="#e8ff47"/>
+  <circle cx="86.4" cy="73"   r="4.5" fill="#e8ff47"/>
+  <circle cx="50"   cy="73"   r="4.5" fill="#e8ff47"/>
+  <circle cx="68.2" cy="41.5" r="4.5" fill="#e8ff47"/>
+  <circle cx="31.8" cy="41.5" r="4.5" fill="#e8ff47"/>
+  <circle cx="50"   cy="52"   r="4.5" fill="#e8ff47"/>
+</svg>
