@@ -112,6 +112,36 @@
       color: var(--accent);
     }
 
+    /* ── ROTATING WORD ── */
+    .word-rotate-wrap {
+      display: inline-block;
+      position: relative;
+      vertical-align: bottom;
+      /* wide enough to hold the longest word without layout shift */
+      min-width: 5ch;
+    }
+
+    .word-slot {
+      display: inline-block;
+      color: var(--accent);
+      position: relative;
+      animation: wordIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .word-slot.out {
+      animation: wordOut 0.35s cubic-bezier(0.55, 0, 1, 0.45) both;
+    }
+
+    @keyframes wordIn {
+      from { opacity: 0; transform: translateY(0.35em) skewY(6deg); }
+      to   { opacity: 1; transform: translateY(0) skewY(0deg); }
+    }
+
+    @keyframes wordOut {
+      from { opacity: 1; transform: translateY(0) skewY(0deg); }
+      to   { opacity: 0; transform: translateY(-0.35em) skewY(-6deg); }
+    }
+
     .hero-sub {
       font-size: clamp(1.1rem, 2.5vw, 1.4rem);
       font-weight: 300;
@@ -171,7 +201,7 @@
     .marquee-track {
       display: flex;
       gap: 3rem;
-      animation: scroll 20s linear infinite;
+      animation: scroll 50s linear infinite;
       white-space: nowrap;
       width: max-content;
     }
@@ -484,7 +514,7 @@
   <!-- HERO -->
   <div id="hero">
     <p class="hero-eyebrow">Paul Raff — Data &amp; AI Strategy</p>
-    <h1>Data is<br>the <em>New AI.</em></h1>
+    <h1><span class="word-rotate-wrap"><span class="word-slot" id="rotating-word">Data</span></span> is<br>the <em>New AI</em></h1>
     <p class="hero-sub">
       Everyone is racing to adopt AI. The companies that will win
       aren't the ones with the fanciest models —
@@ -544,7 +574,7 @@
         </div>
       </div>
       <div>
-        <p class="thesis-quote">
+        <p class="thesis-quote" id="thesis-quote">
           "The best AI strategy is almost always a better data strategy in disguise."
         </p>
       </div>
@@ -686,6 +716,43 @@
       </form>
     </div>
   </section>
+
+  <script>
+    // ── ROTATING HERO WORD ──
+    const words = ['Data', 'Context', 'Strategy', 'Truth', 'Insight'];
+    let current = 0;
+    const el = document.getElementById('rotating-word');
+
+    function rotateWord() {
+      // Animate out
+      el.classList.add('out');
+      el.addEventListener('animationend', function onOut() {
+        el.removeEventListener('animationend', onOut);
+        current = (current + 1) % words.length;
+        el.textContent = words[current];
+        el.classList.remove('out');
+        // Trigger reflow so animationIn fires fresh
+        void el.offsetWidth;
+        el.style.animation = 'none';
+        void el.offsetWidth;
+        el.style.animation = '';
+      }, { once: true });
+    }
+
+    setInterval(rotateWord, 2800);
+
+    // ── RANDOM THESIS QUOTE ──
+    const quotes = [
+      "The best AI strategy is almost always a better data strategy in disguise.",
+      "You can't prompt your way out of a data quality problem.",
+      "Companies don't fail at AI because the models are wrong. They fail because the data is.",
+      "Every AI transformation is, at its core, a data transformation.",
+      "The moat isn't the model. It's the data the model has never seen.",
+      "Garbage in, hallucination out."
+    ];
+    const quoteEl = document.getElementById('thesis-quote');
+    quoteEl.textContent = '“' + quotes[Math.floor(Math.random() * quotes.length)] + '”';
+  </script>
 
   <!-- FOOTER -->
   <footer>
